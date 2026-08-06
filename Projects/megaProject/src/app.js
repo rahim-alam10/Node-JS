@@ -18,4 +18,11 @@ app.use(express.urlencoded({extended: true, limit: "16kb"}))        //url encode
 app.use(express.static("public"))           // Public Assets: Access by anyone
 app.use(cookieParser())                     // To perfome CRUD operations on cookies
 
+// routers import
+import { router as userRouter } from "./routes/user.routes.js";
+
+
+// routes declaration
+app.use("/user", userRouter);
+
 export default app;

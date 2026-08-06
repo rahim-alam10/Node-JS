@@ -49,8 +49,8 @@ const userSchema = new mongoose.Schema(
     }, { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {      //Pre always runs just before storing in database
-    if (!this.isModified("password")) return next();
+userSchema.pre("save", async function (next) {              //Pre always runs just before storing in database
+    if (!this.isModified("password")) return next();        // Only Encrypt password first time
 
     this.password = bcrypt.hash(this.password, 10)
     next()
