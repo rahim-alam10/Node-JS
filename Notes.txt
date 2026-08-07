@@ -1,0 +1,23 @@
+MiddleWares:
+    1. Application-level MiddleWare : Bound with app.use() 
+    2. Router-level MiddleWare : Bound to router.use()
+    3. Error-handling MiddleWare : Bound with app.use() or router.use()
+    4. Built-in MiddleWare
+    5. Third-party MiddleWare
+
+
+Authentication:
+    1: Session-based Authentication
+    2: Token-based Authentication
+        i: Authentication : User gets a Token
+        ii: Authorization : Token Used by Access resources
+
+        Token:
+            i: Header
+            ii: Payload
+            iii: Signature
+    3: Passwrodless
+    
+
+    postman : "/opt/postman-agent/Postman Agent/Postman Agent"
+
