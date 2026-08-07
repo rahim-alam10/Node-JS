@@ -51,10 +51,12 @@ const userSchema = new mongoose.Schema(
 
 //Pre always runs just before storing in database
 // // Only Encrypt password first time
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return;
 
     this.password = await bcrypt.hash(this.password, 10);
+
+    next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
@@ -69,9 +71,9 @@ userSchema.methods.generateAccessToken = function (params) {
             username:this.username,
             fullName:this.fullName
         },
-        process.env.ACCES_TOKEN_SECRET,
+        process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCES_TOKEN_EXPIRY
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
     )
 
