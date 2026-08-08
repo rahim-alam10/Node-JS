@@ -39,7 +39,7 @@ router.post("/change-passwrod", verifyJWT, changeCurrentPassword)
 router.get("/current-user", verifyJWT, getCurrentUser)
 router.patch("/update-account", verifyJWT, updateAccountDetails)
 router.patch("/avatar", verifyJWT, upload.single("avatar"), updateUserAvatar)
-router.patch("/cover-image", upload.single("cover-image"), verifyJWT, updateUserCoverImage)
+router.patch("/cover-image", upload.single("coverImage"), verifyJWT, updateUserCoverImage)
 router.get("/c/:username", verifyJWT, getUserChannelProfile)
 router.get("/history", verifyJWT, getWatchHistory)
 
