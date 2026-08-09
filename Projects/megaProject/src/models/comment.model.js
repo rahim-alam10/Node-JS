@@ -13,7 +13,7 @@ const commentSchema = new Schema(
             ref: "Video",
         },
 
-        ownwe: {
+        ownwer: {
             type: Schema.Types.ObjectId,
             ref: "User"
         }
