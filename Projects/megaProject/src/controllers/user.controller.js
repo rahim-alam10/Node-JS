@@ -113,7 +113,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
 
-    // find the user
+    // find the user 
     const user = await User.findOne({
         $or: [{ username }]
     })
@@ -252,12 +252,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     try {
-        console.log("Request body:", req.body)
-        console.log("Request headers:", req.headers['content-type'])
-        if (!req.body) {
-            console.log("❌ req.body is undefined!")
-            throw new ApiError(400, "Request body is missing. Please send data as JSON.")
-        }
         const { oldPassword, newPassword } = req.body
 
         const user = await User.findById(req.user?._id)
