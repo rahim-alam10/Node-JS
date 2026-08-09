@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
         },
+
         email: {
             type: String,
             required: true,
@@ -18,25 +19,30 @@ const userSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
         },
+
         fullName: {
             type: String,
             required: true,
             trim: true,
         },
+
         avatar: {
             type: String,       // Cloudinary url
             required: true,
         },
+
         coverImage: {
             type: String,       // Cloudinary url
             default: "",
         },
+
         watchHistory: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Video",
             },
         ],
+
         password: {
             type: String,
             required: [true, 'Password is Required'],
@@ -46,6 +52,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             default: "",
         },
+        
     }, { timestamps: true }
 );
 
