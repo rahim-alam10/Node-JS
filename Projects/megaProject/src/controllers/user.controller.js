@@ -250,66 +250,32 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 })
 
 
-// const changeCurrentPassword = asyncHandler(async (req, res) => {
-//     try {
-//         console.log("Request body:", req.body)
-//         console.log("Request headers:", req.headers['content-type'])
-//         if (!req.body) {
-//             console.log("❌ req.body is undefined!")
-//             throw new ApiError(400, "Request body is missing. Please send data as JSON.")
-//         }
-//         const { oldPassword, newPassword } = req.body
-
-//         const user = await User.findById(req.user?._id)
-//         const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
-
-//         if (!isPasswordCorrect) {
-//             throw new ApiError(400, "Invalid Password")
-//         }
-
-//         user.password = newPassword
-//         await user.save({ validateBeforeSave: false })
-
-//         return res
-//             .status(200)
-//             .json(new ApiResponse(200, {}, "Password Changed Successfully"))
-//     } catch (e) {
-//         console.log(`ERROR : ${e}`)
-//     }
-// })
-
 const changeCurrentPassword = asyncHandler(async (req, res) => {
-    // console.log("Request body:", req.body)
-    // console.log("Request headers:", req.headers['content-type'])
-    // if (!req.body) {
-    //     console.log("❌ req.body is undefined!")
-    //     throw new ApiError(400, "Request body is missing. Please send data as JSON.")
-    // }
-    
-    const { oldPassword, newPassword } = req.body
-    console.log("Request body oldPassword:", oldPassword)
-    console.log("Request body newPassword:", newPassword)
+    try {
+        console.log("Request body:", req.body)
+        console.log("Request headers:", req.headers['content-type'])
+        if (!req.body) {
+            console.log("❌ req.body is undefined!")
+            throw new ApiError(400, "Request body is missing. Please send data as JSON.")
+        }
+        const { oldPassword, newPassword } = req.body
 
-    const user = await User.findById(req.user?._id)
-    if (!user) {
-        console.log("User could not be found in the database")
-        throw new ApiError(404, "User not found")
-    } else {
-        console.log("User found:", user._id)
-    }
-    
-    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
-    if (isPasswordCorrect) {
-        console.log("Password check passed")
-    }
-    if (!isPasswordCorrect) {
-        throw new ApiError(400, "Invalid Password")
-    }
+        const user = await User.findById(req.user?._id)
+        const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
 
-    user.password = newPassword
-    await user.save({ validateBeforeSave: false })
+        if (!isPasswordCorrect) {
+            throw new ApiError(400, "Invalid Password")
+        }
 
-    return res.status(200).json(new ApiResponse(200, {}, "Password Changed Successfully"))
+        user.password = newPassword
+        await user.save({ validateBeforeSave: false })
+
+        return res
+            .status(200)
+            .json(new ApiResponse(200, {}, "Password Changed Successfully"))
+    } catch (e) {
+        console.log(`ERROR : ${e}`)
+    }
 })
 
 
